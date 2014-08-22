@@ -24,6 +24,7 @@ describe 'Posts' do
 			visit('/posts')
 			expect(current_path) == posts_path
 			expect(page).not_to have_content('Hello World')
+			expect(page).to have_content('No one has posted yet')
 		end	
 	end
 
