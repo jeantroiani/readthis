@@ -25,4 +25,9 @@ before_action :authenticate_user!, except: [:index]
 		redirect_to ('/posts')
 	end
 
+	def destroy
+		Post.destroy(params.require(:id))
+		redirect_to ('/posts')
+	end
+
 end

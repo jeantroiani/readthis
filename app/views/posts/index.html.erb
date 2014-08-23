@@ -18,6 +18,7 @@
 		<ul>
 			<li><%= post.title %></li>
 			|<span><%= link_to 'Edit', edit_post_path(post) %> </span>
+			|<span><%= link_to 'Delete', post_path(post), method: :delete %></span>
 		</ul>
 	<% end %>
 <% end %>

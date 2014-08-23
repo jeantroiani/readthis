@@ -91,9 +91,25 @@ describe 'Posts' do
 
 	context 'Deleting post' do
 
-		it'users can delete a post' do
-			
+		before(:each) do
+		Post.create( title: 'Hello World')
 		end
+
+		let(:user) do 
+			User.create( email: 'test@test.com',
+							 		 password:'12345678',
+							 		 password_confirmation: '12345678')
+		end
+
+		it'users can delete a post' do
+			visit('/posts')
+			login_as user
+			expect(page).to have_content('Hello World')
+			click_link('Delete')
+			expect(page).not_to have_content('Hello World')
+			expect(current_path) == posts_path
+		end
+
 
 	end
 
