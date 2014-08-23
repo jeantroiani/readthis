@@ -90,7 +90,7 @@ describe 'Posts' do
 			login_as user
 			visit('/posts')
 			logout user
-			click_link('Edit')
+			expect(page).not_to have_link('Edit')
 			expect(current_path) == new_user_session_path 
 		end 
 
