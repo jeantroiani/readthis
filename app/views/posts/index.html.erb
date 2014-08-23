@@ -8,12 +8,16 @@
 <% end %>
 
 
+<br>
+<%= link_to 'New post', new_post_path %>
+
 <% if @posts.empty? %>
 	<p>No one has posted yet</p>
 <%else%>
 	<% @posts.each do |post| %>
 		<ul>
-			<li><%= post.text %></li>
+			<li><%= post.title %></li>
+			|<span><%= link_to 'Edit', edit_post_path(post) %> </span>
 		</ul>
 	<% end %>
 <% end %>
