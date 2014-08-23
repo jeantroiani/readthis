@@ -11,11 +11,12 @@ before_action :authenticate_user!, except: [:index]
 	end
 
 	def create
-		@post=Post.create(params.require(:post).permit(:title))
+		@post=current_user.posts.create(params.require(:post).permit(:title))
 		redirect_to ('/posts')
 	end
 
 	def edit
+
 		@post=Post.find(params.require(:id))
 	end
 
@@ -23,11 +24,19 @@ before_action :authenticate_user!, except: [:index]
 		@post=Post.find(params.require(:id))
 		@post.update(params.require(:post).permit(:title))
 		redirect_to ('/posts')
+		flash.notice = "Post have been updated" 
 	end
 
 	def destroy
+		post = Post.find_by(id: params['id'])
+		if current_user == post.user
 		Post.destroy(params.require(:id))
 		redirect_to ('/posts')
+		flash.alert = "Post have been deleted"
+		else
+		redirect_to('/posts')
+		flash.alert = "You can delete only post written by you" 	
+		end	
 	end
 
 end

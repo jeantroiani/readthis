@@ -91,9 +91,6 @@ describe 'Posts' do
 
 	context 'Deleting post' do
 
-		before(:each) do
-		Post.create( title: 'Hello World')
-		end
 
 		let(:user) do 
 			User.create( email: 'test@test.com',
@@ -101,15 +98,35 @@ describe 'Posts' do
 							 		 password_confirmation: '12345678')
 		end
 
-		it'users can delete a post' do
-			visit('/posts')
-			login_as user
-			expect(page).to have_content('Hello World')
-			click_link('Delete')
-			expect(page).not_to have_content('Hello World')
-			expect(current_path) == posts_path
+		let(:user_2) do 
+			User.create( email: 'test2@test.com',
+							 		 password:'12345678',
+							 		 password_confirmation: '12345678')
 		end
 
+		it'users can delete a post' do
+			login_as user
+			visit('/posts')	
+			click_link('New post')
+			fill_in 'Title', with: 'Hello World'
+			click_button('Submit')
+			click_link('Delete')
+			expect(page).not_to have_content('Hello World')
+			# expect(current_path) == posts_path
+		end
+
+		it'users can delete only their post' do
+			login_as user
+			visit('/posts')
+			click_link('New post')
+			fill_in 'Title', with: 'Hello World'
+			click_button('Submit')
+			expect(page).to have_content('Hello World')
+			logout user
+			login_as user_2
+			click_link('Delete')
+			expect(page).to have_content('You can delete only post written by you')
+		end
 
 	end
 
