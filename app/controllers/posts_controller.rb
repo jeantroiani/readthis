@@ -21,10 +21,16 @@ before_action :authenticate_user!, except: [:index]
 	end
 
 	def update
-		@post=Post.find(params.require(:id))
-		@post.update(params.require(:post).permit(:title))
-		redirect_to ('/posts')
-		flash.notice = "Post have been updated" 
+		post= Post.find_by(id: params['id'])
+		if current_user == post.user
+			@post=Post.find(params.require(:id))
+			@post.update(params.require(:post).permit(:title))
+			redirect_to ('/posts')
+			flash.notice = "Post have been updated" 
+		else
+			redirect_to('/posts')
+			flash.alert = 'Posts can be only edited by its author'
+		end
 	end
 
 	def destroy

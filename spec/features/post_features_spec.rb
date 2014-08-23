@@ -58,9 +58,6 @@ describe 'Posts' do
 
 	context 'Editing post' do
 
-		before(:each) do
-		Post.create( title: 'Hello World')
-		end
 
 		let(:user) do 
 			User.create( email: 'test@test.com',
@@ -68,9 +65,18 @@ describe 'Posts' do
 							 		 password_confirmation: '12345678')
 		end
 
+		let(:user_2) do 
+			User.create( email: 'test2@test.com',
+							 		 password:'12345678',
+							 		 password_confirmation: '12345678')
+		end
+
 		it 'Can be edited' do
-			visit('/posts')
 			login_as user
+			visit('/posts')
+			click_link('New post')
+			fill_in'Title', with: 'Hello World'
+			click_button('Submit')
 			click_link('Edit')
 			expect(page).to have_field('Title', with: 'Hello World')
 			fill_in'Title', with: 'Great day'
@@ -80,10 +86,24 @@ describe 'Posts' do
 		end 
 
 		it 'Cannot be edited if you have not signed in' do
-			visit('/posts')
+			Post.create( title: 'Hello World')
 			login_as user
+			visit('/posts')
 			logout user
 			click_link('Edit')
+			expect(current_path) == new_user_session_path 
+		end 
+
+		it 'Cannot be edited if you are not the author of the post' do
+			visit('/posts')
+			login_as user
+			click_link('New post')
+			fill_in'Title', with: 'Hello World'
+			click_button('Submit')
+			logout user
+			login_as user_2
+			click_link('Edit')
+			expect(page).to have_content('Hello World')
 			expect(current_path) == new_user_session_path 
 		end 
 	
