@@ -51,14 +51,17 @@ require 'rails_helper'
 				expect(page).not_to have_link('Like')
 			end
 
-			xit 'positive and then remove it by clicking dislike and viceversa' do
+			it 'positive and then remove it by clicking dislike and viceversa' do
 
 				login_as user
 				visit ('/posts')
 				expect(page).to have_content ('Likes: 0')
 				click_link('Like')
 				expect(page).to have_content ('Likes: 1')
-				expect(page).not_to have_link('Like')
+				click_link('Dislike')
+				expect(page).to have_link ('Like')
+			
+
 			end
 
 		end
