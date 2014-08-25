@@ -6,9 +6,14 @@ end
 describe 'Posts' do
 	
 	context 'With posts' do
-	
+		let(:user) do 
+			User.create( email: 'test@test.com',
+							 		 password:'12345678',
+							 		 password_confirmation: '12345678')
+		end
+
 		before(:each) do
-		Post.create( title: 'Hello World')
+		user.posts.create( title: 'Hello World')
 		end
 	
 		it 'can be seen when you visit the index' do
@@ -36,6 +41,8 @@ describe 'Posts' do
 							 		 password_confirmation: '12345678')
 		end
 
+
+
 		it 'users can write new posts' do
 			visit('/posts')
 			expect(current_path) == posts_path
@@ -47,6 +54,7 @@ describe 'Posts' do
 		end
 
 		it 'Can not write a post if user have not signed in' do
+
 			visit('/posts')
 			expect(current_path) == posts_path
 			click_link('New post')
@@ -99,10 +107,10 @@ describe 'Posts' do
 		end 
 
 		it 'Cannot be edited if you have not signed in' do
-			Post.create( title: 'Hello World')
-			login_as user
+			user.posts.create( title: 'Hello World')
+			login_as user_2
 			visit('/posts')
-			logout user
+			logout user_2
 			expect(page).not_to have_link('Edit')
 			expect(current_path) == new_user_session_path 
 		end 
@@ -159,6 +167,24 @@ describe 'Posts' do
 			login_as user_2
 			click_link('Delete')
 			expect(page).to have_content('You can delete only post written by you')
+		end
+
+		context 'extra information is shown' do
+			let(:user) do 
+			User.create( email: 'test@test.com',
+							 		 password:'12345678',
+							 		 password_confirmation: '12345678')
+			end
+
+			it'shows the date and author of the post' do
+				login_as user
+				visit('/posts')
+				click_link('New post')
+				fill_in 'Title', with: 'Hello World'
+				click_button('Submit')
+				expect(page).to have_content('Hello World')
+				expect(page).to have_content("by test@test.com")
+			end
 		end
 
 	end

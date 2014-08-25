@@ -17,6 +17,7 @@
 	<% @posts.each do |post| %>
 		<ul>
 			<li><%=link_to post.title, post.url %></li>
+			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<% if current_user == post.user && user_signed_in? %>
 				|<span><%= link_to 'Edit', edit_post_path(post) %> </span>
 				|<span><%= link_to 'Delete', post_path(post), method: :delete %></span>
