@@ -16,12 +16,15 @@ require 'rails_helper'
 											password_confirmation: '12345678')
 				end
 
+				before(:each)do
+					user.posts.create(title: 'Hello World',url: 'www.google.com')
+				end
+
 			it 'by going up a number when you rate it positive' do
 
-				user.posts.create(title: 'Hello World',url: 'www.google.com')
+				login_as user
 				visit ('/posts')
 				expect(page).to have_content ('Hello World')
-				login_as user
 				expect(page).to have_content ('Likes: 0')
 				click_link('Like')
 				expect(page).to have_content ('Likes: 1')
@@ -29,14 +32,33 @@ require 'rails_helper'
 
 			it 'by going down a number when you rate it negative' do
 
-				user.posts.create(title: 'Hello World',url: 'www.google.com')
-				visit ('/posts')
 				login_as user
+				visit ('/posts')
 				expect(page).to have_content ('Likes: 0')
 				click_link('Like')
 				expect(page).to have_content ('Likes: 1')
 				click_link('Dislike')
 				expect(page).to have_content ('Likes: 0')
+			end
+
+			it 'positive or negative only once per user' do
+
+				login_as user
+				visit ('/posts')
+				expect(page).to have_content ('Likes: 0')
+				click_link('Like')
+				expect(page).to have_content ('Likes: 1')
+				expect(page).not_to have_link('Like')
+			end
+
+			xit 'positive and then remove it by clicking dislike and viceversa' do
+
+				login_as user
+				visit ('/posts')
+				expect(page).to have_content ('Likes: 0')
+				click_link('Like')
+				expect(page).to have_content ('Likes: 1')
+				expect(page).not_to have_link('Like')
 			end
 
 		end
