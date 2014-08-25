@@ -63,6 +63,8 @@ describe 'Posts' do
 			fill_in 'Url' ,  with: 'http://www.google.co.uk'
 			click_button('Submit')
 			expect(page).to have_link('Hello World')
+			click_link('Hello World')
+			expect(current_path) == ('http://www.google.co.uk')
 		end
 	
 	end 
@@ -143,7 +145,7 @@ describe 'Posts' do
 			click_button('Submit')
 			click_link('Delete')
 			expect(page).not_to have_content('Hello World')
-			# expect(current_path) == posts_path
+			expect(current_path) == posts_path
 		end
 
 		it'users can delete only their post' do

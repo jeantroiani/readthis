@@ -16,8 +16,8 @@
 <%else%>
 	<% @posts.each do |post| %>
 		<ul>
-			<li><%= post.title %></li>
-			<% if current_user == post.user %>
+			<li><%=link_to post.title, post.url %></li>
+			<% if current_user == post.user && user_signed_in? %>
 				|<span><%= link_to 'Edit', edit_post_path(post) %> </span>
 				|<span><%= link_to 'Delete', post_path(post), method: :delete %></span>
 			<%end%>
