@@ -53,6 +53,17 @@ describe 'Posts' do
 			expect(current_path) == new_post_path
 			expect(page).to have_content('You need to sign in or sign up before continuing.')
 		end
+
+		it 'can have an URL attached to the test' do
+			expect(current_path) == posts_path
+			login_as user
+			visit('/posts')
+			click_link('New post')
+			fill_in 'Title', with: 'Hello World'
+			fill_in 'Url' ,  with: 'http://www.google.co.uk'
+			click_button('Submit')
+			expect(page).to have_link('Hello World')
+		end
 	
 	end 
 
