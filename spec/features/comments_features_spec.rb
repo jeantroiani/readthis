@@ -15,10 +15,11 @@ require 'rails_helper'
 			end
 
 			it ' seen when clicking on comments in the main page' do
+		
+				Comment.create(reply: 'Hiya')
 				login_as user
 				visit('/posts')
-				click_link('Comment')
-				expect(current_path) == post_comments_path
+				click_link('Comment') 
 				expect(page).to have_content('Hello World')
 				expect(page).to have_content('Hiya')
 
