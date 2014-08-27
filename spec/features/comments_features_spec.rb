@@ -10,41 +10,69 @@ require 'rails_helper'
 										password_confirmation:'12345678')
 			end
 
-			before(:each) do
-				user.posts.create(title: 'Hello World', url: 'http://www.google.com')
+			let(:user_2) do
+				User.create(email: 'test_2@test.com',
+										password: '12345678',
+										password_confirmation:'12345678')
 			end
 
-			it ' seen when clicking on Comments in the main page' do	
-				Comment.create(reply: 'Hiya', post_id: 1)
+			before(:each) do
+				@post= user.posts.create(title: 'Hello World', url: 'http://www.test.com')
+			end
+
+			before do
+				@post_2= user_2.posts.create(title: 'Hello Moon', url: 'http://www.test_2.com')
+			end
+
+			it 'seen when clicking on Comments in the main page' do	
+				@post.comments.create(reply: 'Hiya')
 				login_as user
 				visit('/posts')
-				click_link('Comment') 
+				click_link('Comment', match: :first) 
 				expect(page).to have_content('Hello World')
 				expect(page).to have_content('Hiya')
 			end
 
-			it ' seen only if they belong to a selected post' do	
-				Comment.create(reply: 'How are you?', post_id: 1)
-				Comment.create(reply: 'How is life?', post_id: 2)
+			it 'seen only if they belong to a selected post' do	
+				@post.comments.create(reply: 'How are you?')
+				@post_2.comments.create(reply: 'How is life?')
 				login_as user
 				visit('/posts')
-				click_link('Comment') 
+				click_link('Comment',match: :first) 
 				expect(page).to have_content('Hello World')
 				expect(page).to have_content('How are you?')
 				expect(page).not_to have_content('How is life?')
 			end
 
-			xit ' wrote after a post by a signed in user' do
+			it 'wrote after a post by a signed in user' do
 				login_as user
 				visit('/posts')
-				click_link('Comment')
-				expect(current_path) == post_comments_path
-				expect(page).to have_textarea_field
-				fill_in 'Textarea', with: 'Hiya'
-				click_link('Post')
+				click_link('Comment', match: :first)
+				fill_in 'Reply', with: 'Hiya'
+				click_button('Post')
 				expect(page).to have_content('Hello World')
 				expect(page).to have_content('Hiya')
 			end
+
+			it 'not written if you are no signed' do
+				@post.comments.create(reply: 'Hello')
+				visit('/posts')
+				click_link('Comment', match: :first)
+				expect(page).to have_content('Please sign to leave a comment')
+			end
+
+			it 'closed and go back to see all posts' do
+				visit('/posts')
+				click_link('Comment', match: :first)
+				click_link('Back')
+				expect(current_path) == posts_path
+			end 
+
+			it 'counted in the index' do
+				@post.comments.create(reply: 'Hello')
+				visit('/posts')
+				expect(page).to have_content('1 Comments')
+			end 
 		
 		end
 		

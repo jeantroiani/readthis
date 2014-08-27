@@ -1,10 +1,23 @@
 <h1>Comments</h1>
+<br>
+<%= link_to 'Back', posts_path %>
+<br>
 <%= @post.title %>
-</br>
+<br>
 <%= @post.user.email %>
 <%= time_ago_in_words(@post.created_at) %>
-</br>
-<% @post.comments.each do |comment| %>
+<hr>
+<% if current_user %>
+	<%= form_for [@post, @comment] do |f|%>
+		<%= f.label 		 :reply 	%>
+		<%= f.text_area  :reply	  %>
+		<%= f.submit 'Post'      %>
+	<% end %>
+	<%else%>
+	<h3>Please sign to leave a comment</h3>
+<% end %>
+</hr>
+<% @post.comments.reverse.each do |comment| %>
 	<ul>
 		<li><%= comment.reply %></li>
 	</ul>

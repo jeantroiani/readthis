@@ -1,16 +1,5 @@
 <h1>Welcome to readThis </h1>
 
-<% if user_signed_in? %>
-		<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-	<%else%>
-		<%= link_to 'Sign up', new_user_registration_path %>
-		<%= link_to 'Sign in', new_user_session_path %>
-<% end %>
-
-
-<br>
-<%= link_to 'New post', new_post_path %>
-
 <% if @posts.empty? %>
 	<p>No one has posted yet</p>
 <%else%>
@@ -19,6 +8,7 @@
 			<li><%=link_to post.title, post.url %></li>
 			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<span>Likes: <%= post.rating %></span>
+			<%= post.comments.size%>
 			<%= link_to 'Comments', post_comments_path(post)%>
 			<% if user_signed_in? %>
 				<% unless (post.likes.where user_id: current_user.id).count == 1 %>
@@ -27,8 +17,7 @@
 				<% unless (post.dislikes.where user_id: current_user.id).count == 1 %>
 					<%= link_to 'Dislike', post_dislikes_path(post),method: :post %>
 				<%end%>
-			<%end%>
-			
+			<%end%>	
 			<% if current_user == post.user && user_signed_in? %>
 				|<span><%= link_to 'Edit', edit_post_path(post) %> </span>
 				|<span><%= link_to 'Delete', post_path(post), method: :delete %></span>
