@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe 'Users' do
 
-
-	context 'New user' do
+	context 'New' do
 		it 'users can sign up' do
 			visit('/posts')
 			click_link('Sign up')
@@ -13,9 +12,10 @@ describe 'Users' do
 			click_button('Sign up')
 			expect(page).to have_content('Welcome! You have signed up successfully.')
 		end 
+	
 	end
 
-	context 'User already signed up' do
+	context 'already signed up' do
 
 		let (:user) do 
 			User.create(email: 'test@test.com',
@@ -23,7 +23,7 @@ describe 'Users' do
 							 		password_confirmation: '12345678')
 		end
 
-		it 'users can sign in' do
+		it 'can sign in' do
 			user
 			visit('/posts')
 			click_link('Sign in')
@@ -33,12 +33,14 @@ describe 'Users' do
 			expect(page).to have_content('Signed in successfully.')
 		end 
 
-		it 'users can sign out' do
+		it 'can sign out' do
 			login_as user			
 			visit('/posts')			
 			click_link('Sign out')
 			expect(page).to have_content('Signed out successfully.')
 		end 
+
 	end
+
 end
 

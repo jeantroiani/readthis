@@ -28,6 +28,8 @@ gem 'spring'
 
 gem 'devise'
 
+gem 'database_cleaner'
+
 
 group :test, :development do
 
