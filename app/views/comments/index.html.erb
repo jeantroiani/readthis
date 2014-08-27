@@ -1,5 +1,11 @@
 <h1>Comments</h1>
-<%= @post.title 								%>
-<%= @comments.each do |comment| %>
-<%= comment.reply 							%>
+<%= @post.title %>
+</br>
+<%= @post.user.email %>
+<%= time_ago_in_words(@post.created_at) %>
+</br>
+<% @post.comments.each do |comment| %>
+	<ul>
+		<li><%= comment.reply %></li>
+	</ul>
 <% end %>
