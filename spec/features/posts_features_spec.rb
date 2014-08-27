@@ -5,7 +5,7 @@ end
 
 describe 'Posts' do
 	
-	context 'With posts' do
+	context 'existing' do
 		let(:user) do 
 			User.create( email: 'test@test.com',
 							 		 password:'12345678',
@@ -23,7 +23,7 @@ describe 'Posts' do
 		end 
 	end
 
-	context 'No post' do
+	context 'when do not exist' do
 
 		it 'displays informative message' do
 			visit('/posts')
@@ -33,7 +33,7 @@ describe 'Posts' do
 		end	
 	end
 
-	context 'Creating post' do
+	context 'Creating them' do
 		
 		let(:user) do 
 			User.create( email: 'test@test.com',
@@ -77,7 +77,7 @@ describe 'Posts' do
 	
 	end 
 
-	context 'Editing post' do
+	context 'Editing' do
 
 
 		let(:user) do 
@@ -92,7 +92,7 @@ describe 'Posts' do
 							 		 password_confirmation: '12345678')
 		end
 
-		it 'Can be edited' do
+		it 'Can be updated' do
 			login_as user
 			visit('/posts')
 			click_link('New post')
@@ -106,7 +106,7 @@ describe 'Posts' do
 			expect(page).to have_content('Great day')
 		end 
 
-		it 'Cannot be edited if you have not signed in' do
+		it 'Cannot be updated if you have not signed in' do
 			user.posts.create( title: 'Hello World')
 			login_as user_2
 			visit('/posts')
@@ -130,7 +130,7 @@ describe 'Posts' do
 	
 	end
 
-	context 'Deleting post' do
+	context 'Deleting' do
 
 
 		let(:user) do 
@@ -145,7 +145,7 @@ describe 'Posts' do
 							 		 password_confirmation: '12345678')
 		end
 
-		it'users can delete a post' do
+		it 'can be done by user' do
 			login_as user
 			visit('/posts')	
 			click_link('New post')
@@ -156,7 +156,7 @@ describe 'Posts' do
 			expect(current_path) == posts_path
 		end
 
-		it'users can delete only their post' do
+		it 'can be done by authors' do
 			login_as user
 			visit('/posts')
 			click_link('New post')
@@ -168,25 +168,26 @@ describe 'Posts' do
 			click_link('Delete')
 			expect(page).to have_content('You can delete only post written by you')
 		end
+	
+	end
 
-		context 'extra information is shown' do
-			let(:user) do 
-			User.create( email: 'test@test.com',
-							 		 password:'12345678',
-							 		 password_confirmation: '12345678')
-			end
-
-			it'shows the date and author of the post' do
-				login_as user
-				visit('/posts')
-				click_link('New post')
-				fill_in 'Title', with: 'Hello World'
-				click_button('Submit')
-				expect(page).to have_content('Hello World')
-				expect(page).to have_content("by test@test.com")
-			end
+	context 'Hold extra information' do
+		let(:user) do 
+		User.create( email: 'test@test.com',
+						 		 password:'12345678',
+						 		 password_confirmation: '12345678')
 		end
 
+		it'shows the date and author of the post' do
+			login_as user
+			visit('/posts')
+			click_link('New post')
+			fill_in 'Title', with: 'Hello World'
+			click_button('Submit')
+			expect(page).to have_content('Hello World')
+			expect(page).to have_content("by test@test.com")
+		end
+	
 	end
 
 end
