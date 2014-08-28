@@ -26,7 +26,8 @@ before_action :authenticate_user!, except: [:index]
 		post = Post.find_by(id: params['id'])
 		if current_user == post.user
 			post.update(params.require(:post).permit(:title,:url))
-			category = Category.find_or_create_by(tags: params['post']['category'])
+			Category.find_by(post_id: params[:id]).destroy
+		  category = Category.find_or_create_by(tags: params['post']['category'])
 			post.update(category_id: category.id)
 			category.update(post_id: post.id)
 			redirect_to ('/posts')
