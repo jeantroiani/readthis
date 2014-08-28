@@ -42,8 +42,6 @@ describe 'Posts' do
 							 		 password_confirmation: '12345678')
 		end
 
-
-
 		it 'users can write new posts' do
 			visit('/posts')
 			expect(current_path) == posts_path
@@ -212,7 +210,5 @@ describe 'Posts' do
 				expect(page).to have_content('Science') 
 			end
 		end
-	
 	end
-
 end

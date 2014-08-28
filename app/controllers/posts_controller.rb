@@ -25,10 +25,10 @@ before_action :authenticate_user!, except: [:index]
 	def update
 		post = Post.find_by(id: params['id'])
 		if current_user == post.user
-			@post = Post.find(params.require(:id))
-			@category = Category.find_or_create_by(tags: params['post']['category'])
-			@post.update(params.require(:post).permit(:title,:url))
-			@post.update(category_id: @category.id)
+			post.update(params.require(:post).permit(:title,:url))
+			category = Category.find_or_create_by(tags: params['post']['category'])
+			post.update(category_id: category.id)
+			category.update(post_id: post.id)
 			redirect_to ('/posts')
 			flash.notice = "Post have been updated"
 		else
