@@ -17,11 +17,13 @@ require 'rails_helper'
 			end
 
 			before(:each) do
-				@post= user.posts.create(title: 'Hello World', url: 'http://www.test.com')
-			end
-
-			before do
-				@post_2= user_2.posts.create(title: 'Hello Moon', url: 'http://www.test_2.com')
+			
+				category= Category.create(tags: 'History')
+				@post = user.posts.create(title: 'Hello World', url: 'http://www.test.com', category: category)
+		
+				category_2= Category.create(tags: 'History')
+				@post_2 = user_2.posts.create(title: 'Hello Moon', url: 'http://www.test_2.com', category: category_2)
+			
 			end
 
 			it 'seen when clicking on Comments in the main page' do	
@@ -44,7 +46,7 @@ require 'rails_helper'
 				expect(page).not_to have_content('How is life?')
 			end
 
-			it 'wrote after a post by a signed in user' do
+			it 'written after a post by a signed in user' do
 				login_as user
 				visit('/posts')
 				click_link('Comment', match: :first)
@@ -73,7 +75,6 @@ require 'rails_helper'
 				visit('/posts')
 				expect(page).to have_content('1 Comments')
 			end 
-		
 		end
-		
+				
 	end 

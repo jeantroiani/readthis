@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 	has_many 	 :likes
 	has_many 	 :dislikes
 	has_many 	 :comments
+	has_one 	 :category
 
 	def rating
 		self.likes.count - self.dislikes.count

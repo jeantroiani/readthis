@@ -1,7 +1,9 @@
-<%= form_for @post do |f|				%>
+<%= form_for @post do |f|					%>
 	<%=	f.label  		:title  				%>
 	<%=	f.text_area :title 					%>
 	<%= f.label     :url						%>
 	<%=	f.text_area :url						%>
+	<%= f.label 		:category				%>
+	<%=	f.text_area	:category				%>
 	<%=	f.submit 	"Submit"		 			%>
-<% end %> 
+<% end %>

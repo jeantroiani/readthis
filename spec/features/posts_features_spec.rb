@@ -13,7 +13,8 @@ describe 'Posts' do
 		end
 
 		before(:each) do
-		user.posts.create( title: 'Hello World')
+		category = Category.create(tags: 'science')
+		user.posts.create( title: 'Hello World', url: 'www.test.com', category: category)
 		end
 	
 		it 'can be seen when you visit the index' do
@@ -96,7 +97,9 @@ describe 'Posts' do
 			login_as user
 			visit('/posts')
 			click_link('New post')
-			fill_in'Title', with: 'Hello World'
+			fill_in'Title', 	 with: 'Hello World'
+			fill_in'Url', 		 with: 'www.test.com'
+			fill_in'Category', with: 'Science'
 			click_button('Submit')
 			click_link('Edit')
 			expect(page).to have_field('Title', with: 'Hello World')
@@ -107,7 +110,8 @@ describe 'Posts' do
 		end 
 
 		it 'Cannot be updated if you have not signed in' do
-			user.posts.create( title: 'Hello World')
+			category = Category.create(tags: 'science')
+			user.posts.create(title: 'Hello World', url: 'test@test.com', category: category)
 			login_as user_2
 			visit('/posts')
 			logout user_2
@@ -186,6 +190,27 @@ describe 'Posts' do
 			click_button('Submit')
 			expect(page).to have_content('Hello World')
 			expect(page).to have_content("by test@test.com")
+		end
+
+	context'have a tag'do
+
+		let(:user) do
+				User.create(email: 'test@test.com',
+										password: '12345678',
+										password_confirmation:'12345678')
+			end
+
+			it'that can be written when creating it' do
+				login_as user
+				visit('/posts')
+				click_link('New post')
+				fill_in 'Title'			, with: 'Hello World'
+				fill_in	'Url'	 			,	with: 'http://www.test.com'
+				fill_in 'Category'	, with: 'Science'
+				click_button('Submit')
+				expect(current_path) == posts_path
+				expect(page).to have_content('Science') 
+			end
 		end
 	
 	end

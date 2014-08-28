@@ -6,10 +6,11 @@
 	<% @posts.each do |post| %>
 		<ul>
 			<li><%=link_to post.title, post.url %></li>
+			<%= post.category.tags %>
 			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<span>Likes: <%= post.rating %></span>
-			<%= post.comments.size%>
-			<%= link_to 'Comments', post_comments_path(post)%>
+			<%= post.comments.size %>
+			<%= link_to 'Comments', post_comments_path(post) %>
 			<% if user_signed_in? %>
 				<% unless (post.likes.where user_id: current_user.id).count == 1 %>
 					<%= link_to 'Like'	 , post_likes_path(post)	 ,method: :post %>

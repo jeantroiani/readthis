@@ -3,28 +3,32 @@ class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index]
 
 	def index
-		@posts=Post.all
+		@posts = Post.all
 	end
 
 	def new
-		@post=Post.new
+		@post = Post.new
 	end
 
 	def create
-		@post=current_user.posts.create(params.require(:post).permit(:title,:url))
+		@category = Category.find_or_create_by(tags: params['post']['category'])
+		@post = current_user.posts.create(params.require(:post).permit(:title,:url))
+		@category.update(post_id: @post.id)
+		@post.update(category_id: @category.id)
 		redirect_to ('/posts')
 	end
 
 	def edit
-		@post=Post.find(params.require(:id))
+		@post = Post.find(params.require(:id))
 	end
 
 	def update
-		post= Post.find_by(id: params['id'])
+		post = Post.find_by(id: params['id'])
 		if current_user == post.user
-			@post=Post.find(params.require(:id))
+			@post = Post.find(params.require(:id))
+			@category = Category.find_or_create_by(tags: params['post']['category'])
 			@post.update(params.require(:post).permit(:title,:url))
-			
+			@post.update(category_id: @category.id)
 			redirect_to ('/posts')
 			flash.notice = "Post have been updated"
 		else
