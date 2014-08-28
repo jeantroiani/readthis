@@ -4,6 +4,6 @@
 	<%= f.label     :url						%>
 	<%=	f.text_area :url						%>
 	<%= f.label 		:category				%>
-	<%=	f.text_area	:category				%>
+	<%=	f.text_area	:category	,value: @post.category.tags	%>
 	<%=	f.submit 	"Submit"		 			%>
 <% end %>
