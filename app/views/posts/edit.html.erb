@@ -1,2 +1,10 @@
 <h1>Update</h1>
-<%= render 'form' %>
+<%= form_for @post do |f|					%>
+	<%=	f.label  		:title  				%>
+	<%=	f.text_area :title 					%>
+	<%= f.label     :url						%>
+	<%=	f.text_area :url						%>
+	<%= f.label 		:category				%>
+	<%=	f.text_area	:category	, value: @post.category.tags %>
+	<%=	f.submit 	"Submit"		 			%>
+<% end %>

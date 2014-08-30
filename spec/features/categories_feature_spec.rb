@@ -13,11 +13,11 @@ require 'rails_helper'
 
 			end
 
-			it 'filter by selection' do
-				visit(/post)
+			xit 'filter by selection' do
+				visit('/post')
 				click_link('History')
 				expect(page).to have_content('Hello World')
-				expect(page).not_to  have_content('Hello Moon')
+				expect(page).not_to have_content('Hello Moon')
 			end
 
 		end
