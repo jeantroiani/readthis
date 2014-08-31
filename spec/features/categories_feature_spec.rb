@@ -1,25 +1,51 @@
 require 'rails_helper'
-	
-	context 'categories' do
-		
-		describe 'allows' do
+  
+  context 'categories' do
+    
+    describe 'allows' do
 
-			before(:each) do
-				category= Category.create(tags: 'History')
-				@post = user.posts.create(title: 'Hello World', url: 'http://www.test.com', category: category)
+      let(:user) do
+        User.create(email: 'test@test.com',
+                        password: '12345678',
+                        password_confirmation: '12345678')
+        end
 
-				category_2= Category.create(tags: 'History')
-				@post_2 = user_2.posts.create(title: 'Hello Moon', url: 'http://www.test_2.com', category: category_2)
+      let(:user_2) do
+        User.create(email: 'test_2@test.com',
+                        password: '12345678',
+                        password_confirmation: '12345678')
+        end
 
-			end
+      before(:each) do
+        category= Category.create(tags: 'History')
 
-			xit 'filter by selection' do
-				visit('/post')
-				click_link('History')
-				expect(page).to have_content('Hello World')
-				expect(page).not_to have_content('Hello Moon')
-			end
+        @post = user.posts.create(title: 'Hello World',
+                                  url: 'http://www.test.com',
+                                  category: category)
 
-		end
+        category_2= Category.create(tags: 'Science')
 
-	end
+        @post_2 = user_2.posts.create(title: 'Hello Moon',
+                                      url: 'http://www.test_2.com',
+                                      category: category_2)
+
+      end
+
+      it 'to show all the categories available' do
+  
+        visit('/posts')
+        click_link('Categories')
+        expect(page).to have_link('History')
+        expect(page).to have_link('Science')
+      end
+
+      it 'filter post by selection' do
+        visit('/categories')
+        click_link('History')
+        expect(page).to have_content('Hello World')
+        expect(page).not_to have_content('Hello Moon')
+      end
+
+    end
+
+  end

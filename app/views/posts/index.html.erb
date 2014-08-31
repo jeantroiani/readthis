@@ -1,12 +1,15 @@
 <h1>Welcome to readThis </h1>
 
+<%= link_to 'Categories', categories_path%>
+
+
 <% if @posts.empty? %>
 	<p>No one has posted yet</p>
 <%else%>
 	<% @posts.each do |post| %>
 		<ul>
 			<li><%=link_to post.title, post.url %></li>
-			<%= post.category.tags %>
+			<%= post.category.tags%>
 			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<span>Likes: <%= post.rating %></span>
 			<%= post.comments.size %>
