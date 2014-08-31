@@ -19,10 +19,10 @@ require 'rails_helper'
 			before(:each) do
 			
 				category= Category.create(tags: 'History')
-				@post = user.posts.create(title: 'Hello World', url: 'http://www.test.com', category: category)
+				@post = user.posts.create(title: 'Hello World', url: 'http://www.test.com', category_id: category.id)
 		
 				category_2= Category.create(tags: 'History')
-				@post_2 = user_2.posts.create(title: 'Hello Moon', url: 'http://www.test_2.com', category: category_2)
+				@post_2 = user_2.posts.create(title: 'Hello Moon', url: 'http://www.test_2.com', category_id: category_2.id)
 			
 			end
 

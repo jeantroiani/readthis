@@ -13,7 +13,7 @@ before_action :authenticate_user!, except: [:index]
 	def create
 		@category = Category.find_or_create_by(tags: params['post']['category'])
 		@post = current_user.posts.create(params.require(:post).permit(:title,:url))
-		@category.update(post_id: @post.id)
+	
 		@post.update(category_id: @category.id)
 		redirect_to ('/posts')
 	end
@@ -26,10 +26,8 @@ before_action :authenticate_user!, except: [:index]
 		@post = Post.find_by(id: params['id'])
 		if current_user == @post.user
 			@post.update(params.require(:post).permit(:title,:url))
-			Category.find_by(post_id: params[:id]).destroy
-		  category = Category.find_or_create_by(tags: params['post']['category'])
+			category = Category.find_or_create_by(tags: params['post']['category'])
 			@post.update(category_id: category.id)
-			category.update(post_id: @post.id)
 			redirect_to ('/posts')
 			flash.notice = "Post have been updated"
 		else
@@ -39,7 +37,7 @@ before_action :authenticate_user!, except: [:index]
 	end
 
 	def destroy
-		@post = Post.find_by(id: params['id'])
+		post = Post.find_by(id: params['id'])
 		if current_user == post.user
 			Post.destroy(params.require(:id))
 			redirect_to ('/posts')

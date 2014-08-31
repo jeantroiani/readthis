@@ -18,7 +18,7 @@ require 'rails_helper'
 
 				before(:each)do
 					category= Category.create(tags: 'Science')
-					user.posts.create(title: 'Hello World',url: 'www.google.com', category: category)
+					user.posts.create(title: 'Hello World',url: 'www.google.com', category_id: category.id)
 				end
 
 			it 'by going up a number when you rate it positive' do

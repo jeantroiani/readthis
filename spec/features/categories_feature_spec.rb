@@ -21,17 +21,17 @@ require 'rails_helper'
 
         @post = user.posts.create(title: 'Hello World',
                                   url: 'http://www.test.com',
-                                  category: category)
+                                  category_id: category.id)
 
         category_2= Category.create(tags: 'Science')
 
         @post_2 = user_2.posts.create(title: 'Hello Moon',
                                       url: 'http://www.test_2.com',
-                                      category: category_2)
+                                      category_id: category_2.id)
 
       end
 
-      it 'to show all the categories available' do
+      it 'to show all available' do
   
         visit('/posts')
         click_link('Categories')

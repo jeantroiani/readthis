@@ -9,7 +9,7 @@
 	<% @posts.each do |post| %>
 		<ul>
 			<li><%=link_to post.title, post.url %></li>
-			<%= post.category.tags%>
+				<%= Category.find_by(id: post.category_id).tags%>
 			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<span>Likes: <%= post.rating %></span>
 			<%= post.comments.size %>

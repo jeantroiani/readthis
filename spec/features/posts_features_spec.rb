@@ -14,7 +14,7 @@ describe 'Posts' do
 
 		before(:each) do
 		category = Category.create(tags: 'science')
-		user.posts.create( title: 'Hello World', url: 'www.test.com', category: category)
+		user.posts.create( title: 'Hello World', url: 'www.test.com', category_id: category.id)
 		end
 	
 		it 'can be seen when you visit the index' do
@@ -109,7 +109,7 @@ describe 'Posts' do
 
 		it 'Cannot be updated if you have not signed in' do
 			category = Category.create(tags: 'science')
-			user.posts.create(title: 'Hello World', url: 'test@test.com', category: category)
+			user.posts.create(title: 'Hello World', url: 'test@test.com', category_id: category.id)
 			login_as user_2
 			visit('/posts')
 			logout user_2

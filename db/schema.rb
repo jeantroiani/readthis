@@ -20,10 +20,7 @@ ActiveRecord::Schema.define(version: 20140828182517) do
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "post_id"
   end
-
-  add_index "categories", ["post_id"], name: "index_categories_on_post_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.string   "reply"
