@@ -2,14 +2,13 @@
 
 <%= link_to 'Categories', categories_path%>
 
-
 <% if @posts.empty? %>
 	<p>No one has posted yet</p>
 <%else%>
 	<% @posts.each do |post| %>
 		<ul>
 			<li><%=link_to post.title, post.url %></li>
-				<%= Category.find_by(id: post.category_id).tags%>
+				<%=link_to post.category.tags, category_path(post.category_id) %>
 			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<span>Likes: <%= post.rating %></span>
 			<%= post.comments.size %>

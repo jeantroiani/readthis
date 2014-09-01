@@ -1,9 +1,10 @@
-<h1>Technology</h1>
+<% post = @posts.first %>
+<h1><%= category_of(post) %></h1>
 
 <% @posts.each  do |post| %>
 	<ul>
 		<li>
-			<%= post.title  %>
+			<%= link_to post.title, post.url %>
 		</li>
 	</ul>
 <%end%>

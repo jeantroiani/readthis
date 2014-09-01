@@ -32,17 +32,23 @@ require 'rails_helper'
       end
 
       it 'to show all available' do
-  
         visit('/posts')
         click_link('Categories')
         expect(page).to have_link('History')
         expect(page).to have_link('Science')
       end
 
-      it 'filter post by selection' do
+      it 'to filter post by selection from categories' do
         visit('/categories')
         click_link('History')
-        expect(page).to have_content('Hello World')
+        expect(page).to have_link('Hello World')
+        expect(page).not_to have_content('Hello Moon')
+      end
+
+      it 'to filter post by selection from index' do
+        visit('/posts')
+        click_link('History')
+        expect(page).to have_link('Hello World')
         expect(page).not_to have_content('Hello Moon')
       end
 
