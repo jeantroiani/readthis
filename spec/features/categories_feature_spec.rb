@@ -17,13 +17,13 @@ require 'rails_helper'
         end
 
       before(:each) do
-        category= Category.create(tags: 'History')
+        category = Category.create(tags: 'History')
 
         @post = user.posts.create(title: 'Hello World',
                                   url: 'http://www.test.com',
                                   category_id: category.id)
 
-        category_2= Category.create(tags: 'Science')
+        category_2 = Category.create(tags: 'Science')
 
         @post_2 = user_2.posts.create(title: 'Hello Moon',
                                       url: 'http://www.test_2.com',

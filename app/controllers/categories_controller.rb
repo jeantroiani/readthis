@@ -8,10 +8,6 @@ class CategoriesController < ApplicationController
 	end
 end
 
-def category_of(post)
-	Category.find_by(id: post.category_id).tags
-end
-
 def Post_in(category)
 	Post.find_by(category_id: category.id)	
 end
