@@ -11,3 +11,6 @@ end
 def Post_in(category)
 	Post.find_by(category_id: category.id)	
 end
+
+
+
