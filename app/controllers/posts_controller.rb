@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index]
 
 	def index
-		@posts = Post.all
+		@posts = Post.sort_by_hotness
 		@categories =Category.all
 	end
 
@@ -58,3 +58,4 @@ end
 def top_popular(category)
 	sort_by_posts_in(category).first(5)
 end
+

@@ -6,14 +6,14 @@ require 'rails_helper'
 
       let(:user) do
         User.create(email: 'test@test.com',
-                        password: '12345678',
-                        password_confirmation: '12345678')
+                    password: '12345678',
+                    password_confirmation: '12345678')
         end
 
       let(:user_2) do
         User.create(email: 'test_2@test.com',
-                        password: '12345678',
-                        password_confirmation: '12345678')
+                    password: '12345678',
+                    password_confirmation: '12345678')
         end
 
       before(:each) do

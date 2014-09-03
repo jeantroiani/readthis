@@ -1,6 +1,9 @@
 
 <h1>Welcome to readThis </h1>
 
+<%=link_to 'Hot', posts_path %>
+<br>
+
 <% top_popular(@categories).each do |category| %>
 <span><%=link_to category.tags, category_path(category) %></span>
 <%end%>
