@@ -8,12 +8,7 @@ before_action :authenticate_user!, except: [:index]
 		else
 			@posts = Post.all
 		end	
-		# @posts = Post.params['sort_by:']
 		@categories =Category.all
-
-		# @posts = Post.sort_by_newer
-		# @posts = Post.sort_by_hotness
-	 	#  @posts = Post.sort_by_controversial
 	end
 
 	def new

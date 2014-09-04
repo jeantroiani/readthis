@@ -14,6 +14,12 @@ require 'rails_helper'
 									password_confirmation: '12345678')
 		end
 
+		let(:user_3) do 
+			User.create(email: 'test_3@test.com',
+									password: '12345678',
+									password_confirmation: '12345678')
+		end
+
 		before(:each) do
 			category = Category.create(tags: 'History')
 
@@ -30,25 +36,26 @@ require 'rails_helper'
                                     category_id: category_2.id)
 		end
 
-		it 'sorts posts by more votes all the time' do
+		xit 'sorts them by more hot' do
 			login_as user
 			visit('/posts')
-			click_link('like',match: :first)
+			click_link('Like',match: :first)
 			click_link('Hot')
-			expect(page).to have_content('Hello Sun')
-			expect(page).not_to have_content('Hello World')
+			expect(page).to have_content('Hello Moon')
+			expect(page).to have_content('Hello World')
 		end
 
-		it 'sorts posts by more controversial' do
+		it 'sorts them by more controversial' do
 			login_as user
 			visit('/posts')
-			click_link('like',match: :first)
+			click_link('Like', match: :first)
 			logout user
 			login_as user_2
 			click_link('Dislike',match: :first)
 			click_link('Controversial')
-			expect(page).to have_content('Hello Sun')
-			expect(page).not_to have_content('Hello World')
+			expect(current_path).to eq('/posts.sort_by_controversial')
+			expect(page).to have_content('Hello World')
+			expect(page).not_to have_content('Hello Moon')
 		end
 
 	end
