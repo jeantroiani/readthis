@@ -8,6 +8,12 @@ require 'rails_helper'
 									password_confirmation: '12345678')
 		end
 
+		let(:user_2) do 
+			User.create(email: 'test_2@test.com',
+									password: '12345678',
+									password_confirmation: '12345678')
+		end
+
 		before(:each) do
 			category = Category.create(tags: 'History')
 
@@ -33,6 +39,16 @@ require 'rails_helper'
 			expect(page).not_to have_content('Hello World')
 		end
 
-
+		it 'sorts posts by more controversial' do
+			login_as user
+			visit('/posts')
+			click_link('like',match: :first)
+			logout user
+			login_as user_2
+			click_link('Dislike',match: :first)
+			click_link('Controversial')
+			expect(page).to have_content('Hello Sun')
+			expect(page).not_to have_content('Hello World')
+		end
 
 	end

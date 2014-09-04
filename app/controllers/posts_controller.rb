@@ -3,11 +3,17 @@ class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index]
 
 	def index
-		@posts = Post.all
+		if params[:format]
+			@posts = Post.send(params[:format].to_sym)
+		else
+			@posts = Post.all
+		end	
+		# @posts = Post.params['sort_by:']
 		@categories =Category.all
+
 		# @posts = Post.sort_by_newer
 		# @posts = Post.sort_by_hotness
-	  # @posts = Post.sort_by_controversial
+	 	#  @posts = Post.sort_by_controversial
 	end
 
 	def new

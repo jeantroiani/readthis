@@ -1,7 +1,8 @@
 
 <h1>Welcome to readThis </h1>
 
-<%=link_to 'Hot', posts_path %>
+<%= link_to "Hot", posts_path('sort_by_newer') %>
+
 <br>
 
 <% top_popular(@categories).each do |category| %>
