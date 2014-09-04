@@ -3,8 +3,11 @@ class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index]
 
 	def index
-		@posts = Post.sort_by_hotness
+		@posts = Post.all
 		@categories =Category.all
+		# @posts = Post.sort_by_newer
+		# @posts = Post.sort_by_hotness
+	  # @posts = Post.sort_by_controversial
 	end
 
 	def new

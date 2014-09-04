@@ -12,34 +12,3 @@ class LikesController < ApplicationController
 	end
 
 end
-
-#More likes overall
-
-def top
-	@posts = Post.all
-	@posts.sort do |a,b|
-		a.likes <=> b.likes
-	end
-end
-
-
-def hot
-	posts = Post.all
-	posts.sort()
-	post.likes
-end
-#More likes in the first week
-
-def controversial
-	posts = Post.all
-	post.each
-	post.likes
-end
-#Equal amount of likes or dislikes
-
-def new
-	posts = Post.all
-	post.each
-	post.likes
-end
-#Created in the day

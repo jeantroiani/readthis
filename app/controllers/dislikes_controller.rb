@@ -11,5 +11,4 @@ class DislikesController < ApplicationController
 		end
 	end
 
-
 end
