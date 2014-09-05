@@ -48,7 +48,7 @@ RSpec.describe Post, :type => :model do
 			Dislike.create(post_id: @post_2.id)
       expect(Post.sort_by_controversial).to eq([@post_2])
 		end
-
+		
 	end
 
 end

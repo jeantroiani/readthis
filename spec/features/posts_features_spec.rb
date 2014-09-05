@@ -18,20 +18,24 @@ describe 'Posts' do
 		end
 	
 		it 'can be seen when you visit the index' do
+
 			visit('/posts')
 			expect(current_path) == posts_path
 			expect(page).to have_content('Hello World')
 		end 
+
 	end
 
 	context 'when do not exist' do
 
 		it 'displays informative message' do
+
 			visit('/posts')
 			expect(current_path) == posts_path
 			expect(page).not_to have_content('Hello World')
 			expect(page).to have_content('No one has posted yet')
 		end	
+
 	end
 
 	context 'Creating them' do
@@ -43,6 +47,7 @@ describe 'Posts' do
 		end
 
 		it 'users can write new posts' do
+
 			visit('/posts')
 			expect(current_path) == posts_path
 			login_as user
@@ -62,6 +67,7 @@ describe 'Posts' do
 		end
 
 		it 'can have an URL attached to the test' do
+
 			expect(current_path) == posts_path
 			login_as user
 			visit('/posts')
@@ -92,6 +98,7 @@ describe 'Posts' do
 		end
 
 		it 'Can be updated' do
+
 			login_as user
 			visit('/posts')
 			click_link('New post')
@@ -108,6 +115,7 @@ describe 'Posts' do
 		end 
 
 		it 'Cannot be updated if you have not signed in' do
+
 			category = Category.create(tags: 'science')
 			user.posts.create(title: 'Hello World', url: 'test@test.com', category_id: category.id)
 			login_as user_2
@@ -118,6 +126,7 @@ describe 'Posts' do
 		end 
 
 		it 'Cannot be edited if you are not the author of the post' do
+
 			visit('/posts')
 			login_as user
 			click_link('New post')
@@ -148,6 +157,7 @@ describe 'Posts' do
 		end
 
 		it 'can be done by user' do
+
 			login_as user
 			visit('/posts')	
 			click_link('New post')
@@ -159,6 +169,7 @@ describe 'Posts' do
 		end
 
 		it 'can be done by authors' do
+
 			login_as user
 			visit('/posts')
 			click_link('New post')
@@ -181,6 +192,7 @@ describe 'Posts' do
 		end
 
 		it'shows the date and author of the post' do
+
 			login_as user
 			visit('/posts')
 			click_link('New post')
@@ -199,6 +211,7 @@ describe 'Posts' do
 			end
 
 			it'that can be written when creating it' do
+
 				login_as user
 				visit('/posts')
 				click_link('New post')
@@ -209,6 +222,9 @@ describe 'Posts' do
 				expect(current_path) == posts_path
 				expect(page).to have_content('Science') 
 			end
+
 		end
+
 	end
+
 end

@@ -36,16 +36,6 @@ require 'rails_helper'
                                     category_id: category_2.id)
 		end
 
-		xit 'sorts them by amount of likes' do
-
-			login_as user
-			visit('/posts')
-			click_link('Like',match: :first)
-			click_link('Hot')
-			expect(page).to have_content('Hello Moon')
-			expect(page).to have_content('Hello World')
-		end
-
 		it 'sorts them by more controversial' do
 
 			login_as user

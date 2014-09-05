@@ -32,6 +32,7 @@ require 'rails_helper'
       end
 
       it 'to show all available' do
+ 
         visit('/posts')
         click_link('Categories')
         expect(page).to have_link('History')
@@ -39,6 +40,7 @@ require 'rails_helper'
       end
 
       it 'to filter post by selection from categories' do
+ 
         visit('/categories')
         click_link('History')
         expect(page).to have_link('Hello World')
@@ -46,6 +48,7 @@ require 'rails_helper'
       end
 
       it 'to filter post by selection from index' do
+ 
         visit('/posts')
         click_link('History', match: :first)
         expect(page).to have_link('Hello World')

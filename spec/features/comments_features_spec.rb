@@ -27,6 +27,7 @@ require 'rails_helper'
 			end
 
 			it 'seen when clicking on Comments in the main page' do	
+
 				@post.comments.create(reply: 'Hiya')
 				login_as user
 				visit('/posts')
@@ -36,6 +37,7 @@ require 'rails_helper'
 			end
 
 			it 'seen only if they belong to a selected post' do	
+
 				@post.comments.create(reply: 'How are you?')
 				@post_2.comments.create(reply: 'How is life?')
 				login_as user
@@ -47,6 +49,7 @@ require 'rails_helper'
 			end
 
 			it 'written after a post by a signed in user' do
+
 				login_as user
 				visit('/posts')
 				click_link('Comment', match: :first)
@@ -57,6 +60,7 @@ require 'rails_helper'
 			end
 
 			it 'not written if you are no signed' do
+
 				@post.comments.create(reply: 'Hello')
 				visit('/posts')
 				click_link('Comment', match: :first)
@@ -64,6 +68,7 @@ require 'rails_helper'
 			end
 
 			it 'closed and go back to see all posts' do
+
 				visit('/posts')
 				click_link('Comment', match: :first)
 				click_link('Back')
@@ -71,10 +76,12 @@ require 'rails_helper'
 			end 
 
 			it 'counted in the index' do
+
 				@post.comments.create(reply: 'Hello')
 				visit('/posts')
 				expect(page).to have_content('1 Comments')
 			end 
+
 		end
 				
 	end 
