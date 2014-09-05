@@ -36,7 +36,8 @@ require 'rails_helper'
                                     category_id: category_2.id)
 		end
 
-		xit 'sorts them by more hot' do
+		xit 'sorts them by amount of likes' do
+
 			login_as user
 			visit('/posts')
 			click_link('Like',match: :first)
@@ -46,6 +47,7 @@ require 'rails_helper'
 		end
 
 		it 'sorts them by more controversial' do
+
 			login_as user
 			visit('/posts')
 			click_link('Like', match: :first)
@@ -56,6 +58,22 @@ require 'rails_helper'
 			expect(current_path).to eq('/posts.sort_by_controversial')
 			expect(page).to have_content('Hello World')
 			expect(page).not_to have_content('Hello Moon')
+		end
+
+		it 'showing only created in the last 24 hours' do
+
+			category_3 = Category.create(tags: 'History')
+		  
+		  post_3 = user.posts.create(title: 'Hello Marth',
+                                 url: 'http://www.test_2.com',             
+                                 category_id: category_3.id)
+			
+			login_as user
+			visit('/posts')
+			click_link('Newer')
+			expect(current_path).to eq('/posts.sort_by_newer')
+			expect(page).to have_content('Hello Marth')
+			expect(page).not_to have_content('Hello World')
 		end
 
 	end
