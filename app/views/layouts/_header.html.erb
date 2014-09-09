@@ -1,13 +1,25 @@
 <header>
+	<div class="nav">
+	<div class="nav nav_left">
 	<h1 class='brand'>readThis</h1>
-	<div class="nav_right">
-		<% if user_signed_in? %>
-					<%= link_to 'Sign out', destroy_user_session_path, class: 'button_sign', method: :delete %>
-			<%else%>
-					<%= link_to 'Sign up', new_user_registration_path, class: 'button_sign'%>
-					<%= link_to 'Sign in', new_user_session_path,  class: 'button_sign' %>
-		<% end %>
-
-		<%= link_to 'New post', new_post_path,  class: 'button_sign' %>
+	</div>
+		<div class="nav nav_right">
+			<% if user_signed_in? %>
+						<%= link_to 'Sign out', destroy_user_session_path, class: 'button_sign', method: :delete %>
+				<%else%>
+						<%= link_to 'Sign up', new_user_registration_path, class: 'button_sign'%>
+						<%= link_to 'Sign in', new_user_session_path,  class: 'button_sign' %>
+			<% end %>
+			<%= link_to 'New post', new_post_path,  class: 'button_sign' %>
+		</div>
+	</div>
+	<div class="nav_bottom">
+			<%= link_to 'Categories', categories_path, class:'category_tab' %>
+			<%= link_to "Hot", posts_path('sort_by_hotness'), class:'category_tab' %>
+			<%= link_to "Controversial", posts_path('sort_by_controversial'), class:'category_tab' %>
+			<%= link_to "Newer", posts_path('sort_by_newer'), class:'category_tab' %>
 	</div>
 </header>
+
+
+	

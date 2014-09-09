@@ -12,7 +12,11 @@
 *
 *= require_tree .
 *= require_self
+*= require css_reset
 */
+
+border = 1px blue solid;
+
 html{
 	padding: 0px;
 	margin: 0px;
@@ -29,12 +33,6 @@ body{
 
 a{
 	text-decoration: none;
-	padding: 0px;
-	margin: 0px;
-}
-
-h1{ padding: 0px;
-	margin: 0px;
 }
 
 .container{
@@ -42,39 +40,65 @@ h1{ padding: 0px;
 	overflow-y: auto;
 	padding-top: 80px;
 	margin: 0px auto;
+	border: $border;
 }
 
 header{
 	width:100%;
-	height: 15%;
+	height: 10%;
 	background-color: #D0021B;
-	position: relative;
+	position: fixed;
+}
+
+.nav{
+	height:100%;
+	width: 100%;
+}
+
+.nav_left{
+	width: 49.8%;
+	float: left;
+	text-align: left;
+}
+
+
+.nav_right{
+	width: 49.8%;
+	float: right;
+	text-align: right;
+}
+
+.nav_bottom{
+	width: 100%;
+	height: 40%;
+	background-color: whitesmoke;
+	box-shadow: 0.2,0.2,0.5,1;
 }
 
 .brand{
 	color: white;
 	font-family: helvetica;
 	height: 50px;
+	width: 180px;
 	font-size: 36px;
 	display: inline-block;
-	padding: 2px;
 	position: relative;
-	left:8%;
-	top:15%;
+	top: 20px;
+	left:50px;
 }
 
-.button_sign {
+a.button_sign {
 	width: 	120px;
 	color: whitesmoke;
 	padding: 4px 1px;
 	border: 1px white solid;
 	border-radius: 5px;
-	margin: 0px 0.2%;
+	margin: 0.5%;
 	text-align: center;
 	display: inline-block;
-	float: right;
 	position: relative;
-	top: 40%;
+	top: 20px;
+	right: 25px;
 }
 
 .button_sign:hover{
@@ -82,8 +106,18 @@ header{
 	background-color: whitesmoke;
 }
 
-.category_item {
-	height: 20px;
+a.category_tab{
+	font-family: arial;
 	padding: 5px 10px;
-	border: 1px red solid;
+	position: relative;
+	top: 6px;
+	color: rgba(72,72,72,1);
+	margin: 0px;
 }
+
+a.category_tab:hover{
+	color: rgba(256,256,256,1);
+	background-color: rgba(200,200,200,1);
+}
+
+
