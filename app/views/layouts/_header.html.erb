@@ -1,0 +1,13 @@
+<header>
+	<h1 class='brand'>readThis</h1>
+	<div class="nav_right">
+		<% if user_signed_in? %>
+					<%= link_to 'Sign out', destroy_user_session_path, class: 'button_sign', method: :delete %>
+			<%else%>
+					<%= link_to 'Sign up', new_user_registration_path, class: 'button_sign'%>
+					<%= link_to 'Sign in', new_user_session_path,  class: 'button_sign' %>
+		<% end %>
+
+		<%= link_to 'New post', new_post_path,  class: 'button_sign' %>
+	</div>
+</header>

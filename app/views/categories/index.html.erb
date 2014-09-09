@@ -3,7 +3,7 @@
 <% @categories.each do |category| %>
 	<%if Post_in(category)%>
 		<ul>
-			<li><%= link_to category.tags, category_path(category) %></li>
+			<li><%= link_to category.tags,  category_path(category) %></li>
 		</ul>
 	<%end%>
 <%end%>
