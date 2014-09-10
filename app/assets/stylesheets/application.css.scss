@@ -15,7 +15,6 @@
 *= require css_reset
 */
 
-border = 1px blue solid;
 
 html{
 	padding: 0px;
@@ -33,14 +32,19 @@ body{
 
 a{
 	text-decoration: none;
+	color: rgba(72,72,72,1);
+
+}
+
+a:visited{
+	color: rgba(72,72,72,1);
 }
 
 .container{
 	width:600px;
 	overflow-y: auto;
-	padding-top: 80px;
+	padding-top: 100px;
 	margin: 0px auto;
-	border: $border;
 }
 
 header{
@@ -107,17 +111,87 @@ a.button_sign {
 }
 
 a.category_tab{
+	border-right: 1px rgba(200,200,200,1) solid;
 	font-family: arial;
+	color: rgba(72,72,72,1);
 	padding: 5px 10px;
+	margin: 0px;
 	position: relative;
 	top: 6px;
-	color: rgba(72,72,72,1);
-	margin: 0px;
 }
 
 a.category_tab:hover{
-	color: rgba(256,256,256,1);
+	color: rgba(255,255,255,1);
 	background-color: rgba(200,200,200,1);
 }
+
+.category_list{
+	width:220px;
+	height: 300px;
+	padding: 10px;
+	background-color: rgba(230,230,230,1);
+	border-radius: 12px;
+	position: fixed;
+	top: 120px;
+	right: 5%;
+}
+
+a.category_item{
+	color: white;
+	padding: 4px;
+	margin: 2px;
+	border-radius: 5px;
+	background-color: #409D95;
+	display: inline-block;
+}
+
+.post a.category_item{
+	color: #409D95;
+	padding: 4px;
+	margin: 2px;
+	background-color: transparent;
+	display: block;
+}
+
+.post{
+	min-height:30px;
+	width:60%;
+	padding:10px;	
+	background-color:whitesmoke;
+	margin: 2px auto;
+	box-shadow: 1px,1px,2,0.5;
+	border-bottom: 1px rgba(200,200,200,0.6) solid;
+}
+
+.post_title {
+	color: #D0021B;
+	font-family:arial;
+	font-size:1.1em;
+	display:inline-block;
+	border: 1px red solid;
+	max-width:80%;
+}
+
+.post_title:hover{
+	color: red;
+	font-family:arial;
+	font-size:1.1em;
+}
+
+.post_edit{
+	font-family:arial;
+	font-size:0.8em;
+	display:inline-block;
+	border: 1px red solid; 
+}
+
+.post_time{
+	display:block;
+	font-family:arial;
+	font-size:0.8em;
+	margin:2px;
+	padding-left:1%;
+}
+
 
 

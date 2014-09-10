@@ -1,25 +1,26 @@
-
-
-<div class="category_list">
-
-<br>
-
-<% top_popular(@categories).each do |category| %>
-<span class='category_item'><%= link_to category.tags, category_path(category) %></span>
-<%end%>
-
-</div>
 <% if @posts.empty? %>
 	<p>No one has posted yet</p>
 <%else%>
 	<% @posts.each do |post| %>
 		<ul>
-			<li><%=link_to post.title, post.url %></li>
-				<%=link_to post.category.tags, category_path(post.category_id) %>
-			<p>Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
-			<span>Likes: <%= post.rating %></span>
+			<article class= "post">
+			
+			<li ><%=link_to post.title, post.url, class:"post_title" %></li>
+			
+			<% if current_user == post.user && user_signed_in? %>
+				<span class='post_edit'><%= link_to 'Edit', edit_post_path(post) %> </span>
+				<span class='post_edit'><%= link_to 'Delete', post_path(post), method: :delete %></span>
+			<%end%>
+
+			<%=link_to post.category.tags, category_path(post.category_id), class:'category_item' %>
+			
+			<p class="post_time">Submitted <%=time_ago_in_words(post.created_at)%> by <%= post.user.email %></p>
 			<%= post.comments.size %>
 			<%= link_to 'Comments', post_comments_path(post) %>
+			
+			
+			<span>Likes: <%= post.rating %></span>
+			
 			<% if user_signed_in? %>
 				<% unless (post.likes.where user_id: current_user.id).count == 1 %>
 					<%= link_to 'Like'	 , post_likes_path(post)	 ,method: :post %>
@@ -28,10 +29,11 @@
 					<%= link_to 'Dislike', post_dislikes_path(post),method: :post %>
 				<%end%>
 			<%end%>	
-			<% if current_user == post.user && user_signed_in? %>
-				|<span><%= link_to 'Edit', edit_post_path(post) %> </span>
-				|<span><%= link_to 'Delete', post_path(post), method: :delete %></span>
-			<%end%>
+			
+			</article> 
 		</ul>
 	<% end %>
 <% end %>
+
+
+
