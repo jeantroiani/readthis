@@ -15,7 +15,7 @@
 			<br>
 			<%= yield %>
 		</div>
-		<%= render "posts/categories" %>
+		<%= render partial:"posts/categories", collection:@categories %>
 	</body>
 </html>
 

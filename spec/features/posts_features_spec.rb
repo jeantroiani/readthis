@@ -225,6 +225,18 @@ describe 'Posts' do
 
 		end
 
+		it'can be added by clicking on the box of popular categories' do
+			login_as user
+			visit('/posts')
+			click_link('New post')
+			fill_in 'Title'			, with: 'Hello World'
+			fill_in	'Url'	 			,	with: 'http://www.test.com'
+			click_link'Science'
+			click_button('Submit')
+			expect(current_path) == posts_path
+			expect(page).to have_content('science')
+		end
+
 	end
 
 end

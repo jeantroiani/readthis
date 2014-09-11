@@ -1,9 +1,8 @@
-<h1>Categories</h1>
-
+<h1 class="title">Categories</h1>
+<div>
 <% @categories.each do |category| %>
 	<%if Post_in(category)%>
-		<ul>
-			<li><%= link_to category.tags,  category_path(category) %></li>
-		</ul>
+			<li class="category_title" ><%= link_to category.tags, category_path(category)%></li>
 	<%end%>
 <%end%>
+</div>

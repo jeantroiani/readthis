@@ -61,6 +61,6 @@ def sort_by_posts_in(category)
 end
 
 def top_popular(category)
-	sort_by_posts_in(category).first(5)
+	sort_by_posts_in(category).first(15)
 end
 

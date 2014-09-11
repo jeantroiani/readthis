@@ -1,10 +1,20 @@
-<h1>Create Post</h1>
-<%= form_for @post do |f|					%>
-	<%=	f.label  		:title  				%>
-	<%=	f.text_area :title 					%>
-	<%= f.label     :url						%>
-	<%=	f.text_area :url						%>
-	<%= f.label 		:category				%>
-	<%=	f.text_area	:category	  	  %>
-	<%=	f.submit 	"Submit"		 			%>
-<% end %>
+<h1 class="title" >Create Post</h1>
+<div class="form">
+	<%= form_for @post do |f| %>
+		<%=	f.label  		:title 		,class:'form_label'%>
+		<%=	f.text_area :title 					             %>
+		<%= f.label     :url	 		,class:'form_label'%>
+		<%=	f.text_area :url						             %>
+		<%= f.label 		:category ,class:'form_label'%>
+		<%=	f.text_area	:category										 %>
+		<%=	f.submit 	"Submit"		,class:'button' 	 %>
+	<% end %>
+</div>
+
+<!-- <div class=''>
+	<% @categories.each  category%>
+		<ul>
+			<li><%= category.tags%></li>
+		</ul>
+		<%%>
+</div> -->

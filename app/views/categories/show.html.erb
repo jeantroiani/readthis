@@ -1,9 +1,9 @@
 <% post = @posts.first %>
-<h1><%= post.category.tags %></h1>
+<h1 class="title"><%= post.category.tags %></h1>
 
 <% @posts.each  do |post| %>
 	<ul>
-		<li>
+		<li class='post'>
 			<%= link_to post.title, post.url %>
 		</li>
 	</ul>

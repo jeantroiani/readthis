@@ -42,7 +42,7 @@ require 'rails_helper'
       it 'to filter post by selection from categories' do
  
         visit('/categories')
-        click_link('History')
+        click_link('History', match: :first)
         expect(page).to have_link('Hello World')
         expect(page).not_to have_content('Hello Moon')
       end
