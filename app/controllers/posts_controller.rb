@@ -13,12 +13,12 @@ before_action :authenticate_user!, except: [:index]
 
 	def new
 		@post = Post.new
+		@suggestions = Category.all
 	end
 
 	def create
 		@category = Category.find_or_create_by(tags: params['post']['category'])
 		@post = current_user.posts.create(params.require(:post).permit(:title,:url))
-	
 		@post.update(category_id: @category.id)
 		redirect_to ('/posts')
 	end

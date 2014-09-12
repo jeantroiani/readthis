@@ -11,10 +11,11 @@
 	<% end %>
 </div>
 
-<!-- <div class=''>
-	<% @categories.each  category%>
-		<ul>
-			<li><%= category.tags%></li>
-		</ul>
-		<%%>
-</div> -->
+<h2 class="title">Suggestions</h2>
+<ul class="suggestion_list">
+	<% @suggestions.each do |suggestion|%>
+		<li class="suggested_item" data-tag=<%=suggestion.tags%>>
+			<%= link_to suggestion.tags%>
+		</li>
+	<%end%>
+</ul>

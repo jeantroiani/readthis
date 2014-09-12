@@ -12,5 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+	$('li.suggested_item').on('click', function(e){
+		e.preventDefault();
+		$('#post_category').html($(this).data('tag'));
+	});
+})
+
