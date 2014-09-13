@@ -2,7 +2,7 @@ require 'rails_helper'
   
   context 'categories' do
     
-    describe 'allows' do
+    describe 'can' do
 
       let(:user) do
         User.create(email: 'test@test.com',
@@ -31,7 +31,7 @@ require 'rails_helper'
 
       end
 
-      it 'to show all available' do
+      it 'show all available' do
  
         visit('/posts')
         click_link('Categories')
@@ -39,7 +39,7 @@ require 'rails_helper'
         expect(page).to have_link('Science')
       end
 
-      it 'to filter post by selection from categories' do
+      it 'filter post by selection from categories' do
  
         visit('/categories')
         click_link('History', match: :first)
@@ -47,12 +47,19 @@ require 'rails_helper'
         expect(page).not_to have_content('Hello Moon')
       end
 
-      it 'to filter post by selection from index' do
+      it 'filter post by selection from index' do
  
         visit('/posts')
         click_link('History', match: :first)
         expect(page).to have_link('Hello World')
         expect(page).not_to have_content('Hello Moon')
+      end
+
+      it 'inform if no post is created under it' do
+        Category.create(tags: 'Earthquake')
+        visit('/posts')
+        click_link('Earthquake', match: :first)
+        expect(page).to have_content('No posts in this category yet.')
       end
 
     end

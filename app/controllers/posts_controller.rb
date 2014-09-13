@@ -8,7 +8,7 @@ before_action :authenticate_user!, except: [:index]
 		else
 			@posts = Post.all
 		end	
-		@categories =Category.all
+		@categories = Category.all
 	end
 
 	def new

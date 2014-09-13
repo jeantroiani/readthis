@@ -11,11 +11,11 @@
 	<% end %>
 </div>
 
-<h2 class="title">Why don't you click one suggestions.</h2>
+<h2 class="title">Why don't you click one suggestion?.</h2>
 <ul class="suggestion_list">
 	<% @suggestions.each do |suggestion|%>
 		<li class="suggested_item" data-tag=<%=suggestion.tags%>>
-			<%= link_to suggestion.tags%>
+			<%= link_to suggestion.tags %>
 		</li>
 	<%end%>
 </ul>

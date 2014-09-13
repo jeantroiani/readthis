@@ -184,14 +184,14 @@ describe 'Posts' do
 	
 	end
 
-	context 'Hold extra information' do
+	context 'contains extra information' do
 		let(:user) do 
 		User.create( email: 'test@test.com',
 						 		 password:'12345678',
 						 		 password_confirmation: '12345678')
 		end
 
-		it'shows the date and author of the post' do
+		it'like the date and author of the post' do
 
 			login_as user
 			visit('/posts')
@@ -226,15 +226,16 @@ describe 'Posts' do
 		end
 
 		it'can be added by clicking on the box of popular categories' do
+			category = Category.create(tags: 'science')
 			login_as user
 			visit('/posts')
 			click_link('New post')
 			fill_in 'Title'			, with: 'Hello World'
 			fill_in	'Url'	 			,	with: 'http://www.test.com'
-			click_link'Science'
+			click_link'science'
 			click_button('Submit')
 			expect(current_path) == posts_path
-			expect(page).to have_content('science')
+			expect(page).to have_content('science',count: 2)
 		end
 
 	end
