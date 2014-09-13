@@ -89,15 +89,16 @@ header{
 }
 
 .brand{
-	color: white;
+	color: transparent;
 	font-family: helvetica;
-	height: 50px;
-	width: 180px;
+	height: 60px;
+	width: 380px;
 	font-size: 36px;
 	display: inline-block;
 	position: relative;
-	top: 20px;
+	top: 10px;
 	left:50px;
+	background: url('big_logo.png') no-repeat;
 }
 
 a.button_sign {
@@ -168,7 +169,7 @@ a.category_item{
 	min-height:30px;
 	width:60%;
 	padding:10px;	
-	background-color: rgba(220,200,200,0.3);
+	background-color: rgba(220,220,220,0.9);
 	margin: 1px auto;
 	box-shadow: 1px,1px,2,0.5;
 	border-bottom: 1px rgba(200,200,200,0.6) solid;

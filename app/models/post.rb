@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-	
+	validates :category, presence: true
+
 	belongs_to :user
 	has_many 	 :likes
 	has_many 	 :dislikes

@@ -2,16 +2,16 @@
 <div class="form">
 	<%= form_for @post do |f| %>
 		<%=	f.label  		:title 		,class:'form_label'%>
-		<%=	f.text_area :title 					             %>
+		<%=	f.text_area :title,		:required => true  %>
 		<%= f.label     :url	 		,class:'form_label'%>
-		<%=	f.text_area :url						             %>
+		<%=	f.text_area :url,			:required => true  %>
 		<%= f.label 		:category ,class:'form_label'%>
-		<%=	f.text_area	:category										 %>
-		<%=	f.submit 	"Submit"		,class:'button' 	 %>
+		<%=	f.text_area	:category,:required => true  %>
+		<%=	f.submit 	"Submit"		, class:'button' 	 %>
 	<% end %>
 </div>
 
-<h2 class="title">Suggestions</h2>
+<h2 class="title">Why don't you click one suggestions.</h2>
 <ul class="suggestion_list">
 	<% @suggestions.each do |suggestion|%>
 		<li class="suggested_item" data-tag=<%=suggestion.tags%>>

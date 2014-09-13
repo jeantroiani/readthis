@@ -17,7 +17,7 @@
 $(document).ready(function(){
 	$('li.suggested_item').on('click', function(e){
 		e.preventDefault();
-		$('#post_category').html($(this).data('tag'));
+			$('#post_category').val($(this).data('tag'));
 	});
-})
+});
 
