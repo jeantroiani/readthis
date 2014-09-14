@@ -1,3 +1,7 @@
+<a href="https://codeclimate.com/github/jeantroiani/readthis"><img src="https://codeclimate.com/github/jeantroiani/readthis/badges/gpa.svg" /></a>
+
+<a href="https://codeclimate.com/github/jeantroiani/readthis"><img src="https://codeclimate.com/github/jeantroiani/readthis/badges/coverage.svg" /></a>
+
 readThis
 ===========
 
