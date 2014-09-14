@@ -10,8 +10,13 @@ An application done based on the famous Reddit. People can sign in and leave pos
 
 How to use it
 =============
+http://murmuring-plains-2471.herokuapp.com/posts
+or
 git clone https://github.com/jeantroiani/readthis.git
 rails s
+
+user email:  test@test.com
+password: 12345678
 
 Technologies used
 =============
@@ -21,3 +26,4 @@ Technologies used
 - Rspec
 - Capybara
 - CodeClimate
+- Heroku
