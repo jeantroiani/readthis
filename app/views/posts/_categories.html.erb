@@ -1,5 +1,5 @@
 <div class="category_list">
-	<% top_popular(@categories).each do |category| %>
+	<% @categories.first(15).each do |category| %>
 		<span ><%= link_to category.tags, category_path(category), class:"category_item"  %></span>
 	<%end%>
 </div>

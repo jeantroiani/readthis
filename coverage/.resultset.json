@@ -661,21 +661,17 @@
         null,
         null,
         1,
-        118,
+        2,
         null,
         null,
         1,
-        66,
+        0,
         null,
         null
       ],
       "/Users/jeantroiani/Desktop/readthis/app/models/category.rb": [
         1,
         1,
-        null,
-        1,
-        0,
-        null,
         null,
         1,
         0,
@@ -728,6 +724,6 @@
         null
       ]
     },
-    "timestamp": 1410649192
+    "timestamp": 1410714963
   }
 }
